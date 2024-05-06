@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """
 Fabric script based on the file 1-pack_web_static.py that distributes an
@@ -7,7 +6,7 @@ archive to the web servers
 
 from fabric.api import put, run, env
 from os.path import exists
-env.hosts = ['54.90.11.224', '100.25.157.67']
+env.hosts = ['100.27.2.194', '52.91.134.33']
 
 
 def do_deploy(archive_path):
@@ -29,4 +28,3 @@ def do_deploy(archive_path):
         return True
     except:
         return False
-
