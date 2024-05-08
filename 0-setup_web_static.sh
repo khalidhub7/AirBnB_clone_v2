@@ -1,35 +1,15 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+#   sets up web servers
+dpkg -l | grep nginx > /dev/null 2>&1 || (sudo apt -y update && sudo apt -y upgrade && sudo apt -y install nginx)
+ls /data/web_static/releases/test/ > /dev/null 2>&1 || sudo mkdir -p /data/web_static/releases/test/
+ls /data/web_static/shared/ > /dev/null 2>&1 || sudo mkdir -p /data/web_static/shared/
 
-# Update package lists and install Nginx
-sudo apt update -y
-sudo apt install -y nginx
+echo -e "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHello KHalid\n\t</body>\n</html>" | sudo tee /data/web_static/releases/test/index.html
 
-# Create necessary directories and files
-sudo mkdir -p /data/web_static/releases/test/
-sudo mkdir -p /data/web_static/shared/
-echo "<!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <p>Hello, KHaleed!</p>
-  </body>
-</html>" | sudo tee /data/web_static/releases/test/index.html
-
-# Create symbolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-# Change ownership of directories
-sudo chown -R ubuntu:ubuntu /data/web_static/releases/test/
-sudo chown -R ubuntu:ubuntu /data/web_static/shared/
+sudo chown -R ubuntu:ubuntu /data/
 
-# Update Nginx configuration
-sudo tee -a /etc/nginx/sites-available/default <<EOF
-    location /hbnb_static {
-        alias /data/web_static/current/;
-    }
-EOF
+sudo sed -i '/server_name _;/a \\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
-# Restart Nginx service
-sudo systemctl restart nginx
+sudo service nginx restart
