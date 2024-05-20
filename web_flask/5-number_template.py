@@ -51,7 +51,7 @@ def num(n):
 def num_template(n):
     try:
         numm = int(n)
-        return render_template('./templates/5-number.html', n=numm)
+        return render_template('5-number.html', n=numm)
     except ValueError:
         raise NotFound
 
