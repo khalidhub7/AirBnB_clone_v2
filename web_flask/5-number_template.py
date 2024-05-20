@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """run flask server"""
 from flask import Flask, render_template
@@ -54,4 +53,3 @@ def integer_tmp(n):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-
