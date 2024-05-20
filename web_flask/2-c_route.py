@@ -19,7 +19,7 @@ def variable(text):
     for i in text:
         if i == '_':
             i = ' '
-    return text
+    return 'C ' + text
 
 
 if __name__ == '__main__':
