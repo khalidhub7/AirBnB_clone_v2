@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ web_app """
 from flask import Flask
+from werkzeug.exceptions import NotFound
 app = Flask(__name__)
 
 
@@ -43,7 +44,7 @@ def num(n):
         numm = int(n)
         return '{} is a number'.format(numm)
     except ValueError:
-        pass
+        raise NotFound
 
 
 if __name__ == '__main__':
