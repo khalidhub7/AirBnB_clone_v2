@@ -1,21 +1,26 @@
 #!/usr/bin/python3
-
-"""run flask server"""
-from flask import Flask
-app = Flask(__name__)
-
-
-@app.route("/", strict_slashes=False)
-def hello_world():
-    """hello returned"""
-    return "Hello HBNB!"
+""" web_app """
+from flask import FLASK
+app = FLASK(__name__)
 
 
-@app.route("/hbnb", strict_slashes=True)
+@app.route('/')
+def hello():
+    return 'Hello HBNB!'
+
+
+@app.route('/hbnb')
 def hbnb():
-    """hbnb returned"""
-    return "HBNB"
+    return 'HBNB'
 
 
-if __name__ == "__main__":
+@app.route('/c/<text>')
+def variable(text):
+    for i in text:
+        if i == '_':
+            i = ' '
+    return text
+
+
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
