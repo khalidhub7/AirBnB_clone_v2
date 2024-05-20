@@ -16,10 +16,13 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def variable(text):
+    new = 'C '
     for i in text:
         if i == '_':
-            i = ' '
-    return 'C ' + text
+            new += ' '
+        else:
+            new += i
+    return new
 
 
 if __name__ == '__main__':
