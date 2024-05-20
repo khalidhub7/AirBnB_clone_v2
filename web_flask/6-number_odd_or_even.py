@@ -60,11 +60,7 @@ def num_template(n):
 def num_template_odd_even(n):
     try:
         numm = int(n)
-        gen = ''
-        if isinstance(numm / 2, int):
-            gen = 'odd'
-        else:
-            gen = 'even'
+        gen = 'odd' if numm % 2 != 0 else 'even'
         return render_template('6-number_odd_or_even.html', n=numm, gen=gen)
     except ValueError:
         raise NotFound
