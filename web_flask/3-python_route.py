@@ -25,9 +25,10 @@ def variable(text):
     return new
 
 
+@app.route('/python', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def variable_2(text):
-    new = 'Python  '
+    new = 'Python '
     for i in text:
         if i == '_':
             new += ' '
