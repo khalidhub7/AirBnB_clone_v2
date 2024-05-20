@@ -4,22 +4,14 @@ from flask import FLASK
 app = FLASK(__name__)
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def hello():
     return 'Hello HBNB!'
 
 
-@app.route('/hbnb')
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
     return 'HBNB'
-
-
-@app.route('/c/<text>')
-def variable(text):
-    for i in text:
-        if i == '_':
-            i = ' '
-    return text
 
 
 if __name__ == '__main__':
