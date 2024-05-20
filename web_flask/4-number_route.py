@@ -39,9 +39,11 @@ def variable_2(text):
 
 @app.route('/number/<n>', strict_slashes=False)
 def num(n):
-    txt = '{} is a number'.format(n)
-    if isinstance(n, int):
-        return txt
+    try:
+        numm = int(n)
+        return '{} is a number'.format(numm)
+    except ValueError:
+        pass
 
 
 if __name__ == '__main__':
