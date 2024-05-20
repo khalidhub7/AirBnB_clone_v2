@@ -37,7 +37,7 @@ def variable_2(text):
     return new
 
 
-@app.route('/number/<n>')
+@app.route('/number/<n>', strict_slashes=False)
 def num(n):
     txt = '{} is a number'.format(n)
     if isinstance(n, int):
