@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """run flask server"""
 from flask import Flask, redirect, url_for
@@ -48,4 +47,3 @@ def integer(n):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-
