@@ -1,30 +1,22 @@
 #!/usr/bin/python3
-""" holds class State"""
-import models
-from models.base_model import BaseModel, Base
-from models.city import City
-from os import getenv
-import sqlalchemy
-from sqlalchemy import Column, String, ForeignKey
+""" state model for airbnb project """
+import os
+from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from models.base_model import Base, BaseModel
 
 
 class State(BaseModel, Base):
-    """Representation of state """
-    if models.storage_t == "db":
-        __tablename__ = 'states'
+    """ state class """
+    __tablename__ = 'states'
+    if os.getenv('HBNB_TYPE_STORAGE') == "db":
         name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
+        cities = relationship('City', backref="state", cascade='all, delete-orphan')
     else:
         name = ""
 
-    def __init__(self, *args, **kwargs):
-        """initializes state"""
-        super().__init__(*args, **kwargs)
-
-    if models.storage_t != "db":
         @property
         def cities(self):
-            """getter for list of city instances related to the state"""
-            return [city for city in models.storage.all(
-                City) if city.state_id == self.id]
+            from models import storage
+            file_cities = storage.all(storage.classes['City']).values()
+            return [city for city in file_cities if city.state_id == self.id]
