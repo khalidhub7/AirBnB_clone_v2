@@ -73,7 +73,8 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] == '{' and pline[-1] == '}' and type(eval(pline)) == dict:
+                    if pline[0] == '{' and pline[-1] == '}' and type(
+                            eval(pline)) == dict:
                         _args = pline
                     else:
                         _args = pline.replace(',', '')
@@ -112,67 +113,34 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    '''def do_create(self, args):
-        """ Create an object of any class
-        update: create <Class name> <param 1> <param 2> <param 3>...
-        by khalid"""
+    def do_create(self, line):
+        """
+        Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
+        Create instance with given k/v and print id
+        """
+        args = line.split()
+        class_name = args[0]
         if not args:
             print("** class name missing **")
             return
-        arg = args.split()
-        if arg[0] not in HBNBCommand.classes:
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[arg[0]]()
-
-        for i in arg[1:]:
-            k, v = i.split('=', 1)
-            if v.startswith('"') and v.endswith('"'):
-                v = v[1:-1].replace('_', ' ')
-                v = v.replace('\\"', '"')
-            elif '.' in v:
-                v = float(v)
+        new_dict = {}
+        for i in args[1:]:
+            k, v = i.split('=')
+            if v.startswith('"'):
+                v = v.strip('"').replace("_", " ")
             else:
-                v = int(v)
-            setattr(new_instance, k, v)
-        storage.save()
-        print(new_instance.id)
-        storage.save()'''
-    
-
-    def do_create(self, line):
-        """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
-        Create a new class instance with given keys/values and print its id.
-        """
-        try:
-            if not line:
-                raise SyntaxError()
-            my_list = line.split(" ")
-
-            kwargs = {}
-            for i in range(1, len(my_list)):
-                key, value = tuple(my_list[i].split("="))
-                if value[0] == '"':
-                    value = value.strip('"').replace("_", " ")
-                else:
-                    try:
-                        value = eval(value)
-                    except (SyntaxError, NameError):
-                        continue
-                kwargs[key] = value
-
-            if kwargs == {}:
-                obj = eval(my_list[0])()
-            else:
-                obj = eval(my_list[0])(**kwargs)
-                storage.new(obj)
-            print(obj.id)
-            obj.save()
-
-        except SyntaxError:
-            print("** class name missing **")
-        except NameError:
-            print("** class doesn't exist **")
+                try:
+                    v = eval(v)
+                except (SyntaxError, NameError):
+                    pass
+            new_dict[k] = v
+        obj = HBNBCommand.classes[class_name](**new_dict)
+        storage.new(obj)
+        print(obj.id)
+        obj.save()
 
     def help_create(self):
         """ Help information for the create method """
