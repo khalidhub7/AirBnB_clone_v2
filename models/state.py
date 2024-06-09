@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" state model for airbnb project """
+""" state model
+    for airbnb project """
 import os
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
@@ -9,14 +10,22 @@ from models.base_model import Base, BaseModel
 class State(BaseModel, Base):
     """ state class """
     __tablename__ = 'states'
-    if os.getenv('HBNB_TYPE_STORAGE') == "db":
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)
-        cities = relationship('City', backref="state", cascade='all, delete-orphan')
-    else:
-        name = ""
+        cities = relationship(
+            'City',
+            backref='state',
+            cascade='all, delete-orphan')
 
+    if os.getenv('HBNB_TYPE_STORAGE') != 'db':
+        name = ''
         @property
         def cities(self):
             from models import storage
-            file_cities = storage.all(storage.classes['City']).values()
-            return [city for city in file_cities if city.state_id == self.id]
+            all_cities = storage.all(storage.classes['City'])
+            list_cities = []
+
+            for i in all_cities:
+                if i.state_id == self.id:
+                    list_cities.append(i)
+            return list_cities
