@@ -23,4 +23,7 @@ class User(BaseModel, Base):
             backref='user',
             cascade='all, delete-orphan')
     else:
-        email, password, first_name, last_name = ""
+        email = ""
+        password = ""
+        first_name = ""
+        last_name = ""
