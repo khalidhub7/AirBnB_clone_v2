@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """run flask server"""
 from flask import Flask, render_template
