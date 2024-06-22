@@ -34,7 +34,7 @@ class DBStorage:
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        """Return a dictionary"""
+        """Return a dictionary of all objects of a specified class"""
         objs = {}
         if cls is None:
             for clas in Base.__subclasses__():
@@ -44,13 +44,20 @@ class DBStorage:
                     objs[key] = obj
         else:
             if cls == "State":
-                for obj in self.__session.query(classes["State"]).order_by(classes[cls].name.asc()).all():
-                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                    objs[key] = obj
+                # Use classes dictionary to get the class
+                cls_obj = classes.get(cls)
+                if cls_obj:
+                    for obj in self.__session.query(
+                            cls_obj).order_by(cls_obj.name.asc()).all():
+                        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                        objs[key] = obj
             else:
-                for obj in self.__session.query(classes[cls]).all():
-                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                    objs[key] = obj
+                # Use classes dictionary to get the class
+                cls_obj = classes.get(cls)
+                if cls_obj:
+                    for obj in self.__session.query(cls_obj).all():
+                        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                        objs[key] = obj
         return objs
 
     def new(self, obj):
@@ -69,7 +76,8 @@ class DBStorage:
     def reload(self):
         """Create all tables in the database and create the current database session"""
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(
+            bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
 
