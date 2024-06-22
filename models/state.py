@@ -21,6 +21,7 @@ class State(BaseModel, Base):
 
         @property
         def cities(self):
+            """ Get a list of all related City objects """
             from models import storage
             all_cities = storage.all("City").values()
             list_cities = []
