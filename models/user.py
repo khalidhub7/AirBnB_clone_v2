@@ -23,6 +23,7 @@ class User(BaseModel, Base):
             backref='user',
             cascade='all, delete-orphan')
     else:
+        __tablename__ = 'users'
         email = ""
         password = ""
         first_name = ""
