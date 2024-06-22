@@ -24,8 +24,8 @@ def cities_state():
     cities_dict = {}
     for state in states.values():
         cities_dict[state.name] = sorted(
-                                state.cities, key=lambda city: city.name
-                                )
+            state.cities, key=lambda city: city.name
+        )
     return render_template('8-cities_by_states.html\
 ', states=states, cities=cities_dict)
 
