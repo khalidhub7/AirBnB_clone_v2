@@ -43,21 +43,14 @@ class DBStorage:
                     key = "{}.{}".format(obj.__class__.__name__, obj.id)
                     objs[key] = obj
         else:
-            if cls == "State":
-                # Use classes dictionary to get the class
-                cls_obj = classes.get(cls)
-                if cls_obj:
-                    for obj in self.__session.query(
-                            cls_obj).order_by(cls_obj.name.asc()).all():
-                        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                        objs[key] = obj
-            else:
-                # Use classes dictionary to get the class
-                cls_obj = classes.get(cls)
-                if cls_obj:
-                    for obj in self.__session.query(cls_obj).all():
-                        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                        objs[key] = obj
+            # Check if cls is a string and convert it to class if it exists in
+            # classes dictionary
+            if isinstance(cls, str) and cls in classes:
+                cls = classes[cls]
+            if cls and issubclass(cls, BaseModel):
+                for obj in self.__session.query(cls).all():
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                    objs[key] = obj
         return objs
 
     def new(self, obj):
