@@ -22,10 +22,7 @@ class FileStorage:
         "Amenity": Amenity,
         "BaseModel": BaseModel,
         "City": City,
-        "Place": Place,
-        "Review": Review,
-        "State": State,
-        "User": User
+        "Place": Place, "Review": Review, "State": State, "User": User
     }
 
     def all(self, cls=None):
@@ -58,8 +55,8 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
             for key in jo:
-                self.__objects[key] = FileStorage.classes[jo[key]
-                                                          ["__class__"]](**jo[key])
+                cc = FileStorage.classes[jo[key]["__class__"]](**jo[key])
+                self.__objects[key] = cc
         except BaseException:
             pass
 
