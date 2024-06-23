@@ -14,7 +14,7 @@ def states_list():
 
 @app.teardown_appcontext
 def close(current_Session):
-    storage.close(current_Session)
+    storage.close()
 
 
 if __name__ == '__main__':
