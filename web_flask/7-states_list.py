@@ -1,20 +1,29 @@
-#!/usr/bin/python3
-""" flask list all states """
-from models import storage
+#!/usr/bin/python
+"""
+
+"""
 from flask import Flask, render_template
+from models.state import State
+from models import storage
+
 app = Flask(__name__)
+
+
+@app.teardown_appcontext
+def teardown(exception):
+    """
+
+    """
+    storage.close()
 
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
-    states = sorted(storage.all('State').values(),
-                    key=lambda state: state.name)
+    """
+
+    """
+    states = storage.all(State)
     return render_template('7-states_list.html', states=states)
-
-
-@app.teardown_appcontext
-def close(current_Session):
-    storage.close()
 
 
 if __name__ == '__main__':
