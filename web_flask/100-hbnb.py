@@ -3,22 +3,26 @@
 Starts a Flask web application.
 Listens on 0.0.0.0  on port 5000.
 Routes:
-    * /hbnb_filters: HBnB HTML filters page.
+  *  /hbnb: Display the HTML page for hbnb home page.
 """
 from flask import Flask
 from flask import render_template
 from models import storage
 
+
 app = Flask(__name__)
 
 
-@app.route("/hbnb_filters", strict_slashes=False)
-def hbnb_filters():
-    """Displays the HBnB filters HTML page."""
-    states = storage.all("State")
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """Display the HTML page for hbnb home page."""
     amenities = storage.all("Amenity")
-    return render_template("10-hbnb_filters.html",
-                           states=states, amenities=amenities)
+    places = storage.all("Place")
+    states = storage.all("State")
+    return render_template("100-hbnb.html",
+                           amenities=amenities,
+                           places=places,
+                           states=states)
 
 
 @app.teardown_appcontext
