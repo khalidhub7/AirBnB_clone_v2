@@ -1,40 +1,28 @@
 #!/usr/bin/python3
-"""run flask server"""
-from flask import Flask, render_template
+"""Flask application to list cities by states"""
 from models import storage
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
-def sortdict(dictionary):
-    diction = {}
-    for i in dictionary:
-        diction[i] = dictionary[i]
+def cities_by_states():
+    """Retrieve cities by states from the database"""
+    city_by_state = storage.all('State').values()
+    return city_by_state
 
 
-@app.route("/states_list", strict_slashes=False)
-def states():
-    """states returned"""
-    return render_template('7-states_list.html', states=storage.all("State"))
-
-
-@app.route("/cities_by_states", strict_slashes=False)
-def cities_state():
-    """states returned"""
-    states = storage.all("State")
-    cities_dict = {}
-    for state in states.values():
-        cities_dict[state.name] = sorted(
-            state.cities, key=lambda city: city.name
-        )
-    return render_template('8-cities_by_states.html\
-', states=states, cities=cities_dict)
+@app.route('/cities_by_states', strict_slashes=False)
+def display_cities_states():
+    """Display cities by states ordered alphabetically"""
+    states = cities_by_states()
+    return render_template('8-cities_by_states.html', states=states)
 
 
 @app.teardown_appcontext
-def reset(error):
-    """reload data"""
+def close(exception):
+    """Remove the current SQLAlchemy session"""
     storage.close()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
