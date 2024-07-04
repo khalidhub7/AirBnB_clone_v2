@@ -1,26 +1,24 @@
 #!/usr/bin/python3
-"""Flask application to list cities by states"""
+""" list cities by states """
 from models import storage
+from models.state import State
+from models.city import City
 from flask import Flask, render_template
 app = Flask(__name__)
 
-
-def cities_by_states():
-    """Retrieve cities by states from the database"""
-    city_by_state = storage.all('State').values()
-    return city_by_state
-
+def citiesBYstates():
+    """ retrieve cities by states from the database """
+    all_citiesBYstates = storage.all(State).values()
+    return all_citiesBYstates
 
 @app.route('/cities_by_states', strict_slashes=False)
-def display_cities_states():
-    """Display cities by states ordered alphabetically"""
-    states = cities_by_states()
-    return render_template('8-cities_by_states.html', states=states)
-
+def states_list():
+    all_states = citiesBYstates()
+    return render_template('8-cities_by_states.html', states=all_states)
 
 @app.teardown_appcontext
-def close(exception):
-    """Remove the current SQLAlchemy session"""
+def teardown(exception):
+    """ remove current SQLAlchemy Session """
     storage.close()
 
 
