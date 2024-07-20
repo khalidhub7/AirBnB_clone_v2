@@ -6,18 +6,21 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-def sorted_states():
-    """ retrieve and sort states and cities by name """
-    all_states = storage.all(State).values()
-    sorted_states = sorted(all_states, key=lambda state: state.name)
-    for state in sorted_states:
-        state.cities = sorted(state.cities, key=lambda city: city.name)
+def bubble_sort():
+    ''' retrieve and sort states and cities by name '''
+    states = list(storage.all(State).values())
+    n = len(states)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if states[j].name > states[j + 1].name:
+                states[j], states[j + 1] = states[j + 1], states[j]
+    sorted_states = states
     return sorted_states
 
 
 @app.route('/cities_by_states', strict_slashes=False)
 def states_list():
-    all_citiesBYstates = sorted_states()
+    all_citiesBYstates = bubble_sort()
     return render_template('8-cities_by_states.html',
                            states=all_citiesBYstates)
 
