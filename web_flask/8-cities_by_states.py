@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-""" List cities by states """
+"""List cities by states."""
+
 from models import storage
 from models.state import State
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 def bubble_sort(states):
-    """ Retrieve and sort states and cities by name """
+    """Retrieve and sort states and cities by name."""
     # Sort states
     n = len(states)
     for i in range(n):
@@ -21,17 +23,20 @@ def bubble_sort(states):
 
     return states
 
+
 @app.route('/cities_by_states', strict_slashes=False)
 def states_list():
-    """ Display cities by states """
+    """Display cities by states."""
     states = list(storage.all(State).values())
     sorted_states = bubble_sort(states)
     return render_template('8-cities_by_states.html', states=sorted_states)
 
+
 @app.teardown_appcontext
 def teardown(exception):
-    """ Remove current SQLAlchemy Session """
+    """Remove current SQLAlchemy Session."""
     storage.close()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
