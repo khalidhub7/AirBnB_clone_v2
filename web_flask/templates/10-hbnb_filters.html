@@ -1,49 +1,187 @@
 <!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>AirBnb Clone</TITLE>
-        <LINK rel="stylesheet" href="static/styles/4-common.css">
-        <LINK rel="stylesheet" href="static/styles/3-header.css">
-        <LINK rel="stylesheet" href="static/styles/3-footer.css">
-        <LINK rel="stylesheet" href="static/styles/6-filters.css">
-         <LINK rel="icon" href="static/images/icon.png" type="image/png">
-    </HEAD>
-    <BODY>
-        <HEADER>
-            <DIV class="logo"></DIV>
-        </HEADER>
-        <DIV class="container">
-            <SECTION class="filters">
-                <BUTTON type="button">Search</BUTTON>
-                <DIV class="locations">
-                <H3>States</H3>
-                <H4>&nbsp;</H4>
-                    <UL class="popover">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirBnB</title>
+    <link rel="stylesheet" href="../static/styles/103-footer.css">
+    <link rel="stylesheet" href="../static/styles/103-header.css">
+    <link rel="stylesheet" href="../static/styles/103-common.css">
+    <link rel="stylesheet" href="../static/styles/103-filters.css">
+    <link rel="stylesheet" href="../static/styles/103-places.css">
+    <link rel="icon" href="images/icon.png">
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <section class="filters">
+            <button>Search</button>
+
+            <div class="locations">
+                <h3>States</h3>
+                <h4>Select a state ...</h4>
+                <ul class="popover">
                     {% for state in states.values() | sort(attribute="name") %}
-                        <LI><H2>{{ state.name }}</H2></LI>
-                        <LI>
-                            <UL class="popover_l">
+                    <li>
+                        <h2>{{ state.name }}</h2>
+                        <ul class="cities">
                             {% for city in state.cities | sort(attribute="name") %}
-                            <LI>{{ city.name }}</LI>
+                            <li>{{ city.name }}</li>
                             {% endfor %}
-                            </UL>
-                        </LI>
+                        </ul>
+                    </li>
                     {% endfor %}
-                  </UL>
-                </DIV>
-            <DIV class="amenities">
-                <H3>Amenities</H3>
-                <H4>&nbsp;</H4>
-                <UL class="popover">
-                {% for amenity in amenities.values() | sort(attribute="name") %}
-                <LI>{{ amenity.name }}</LI>
-                {% endfor %}
-                </UL>
-                </DIV>
-            </SECTION>
-        </DIV>
-        <FOOTER>
-            Holberton School
-        </FOOTER>
-    </BODY>
-</HTML>
+                </ul>
+            </div>
+
+            <div class="amenities">
+                <h3>Amenities</h3>
+                <h4>Select amenities ...</h4>
+                <ul class="popover">
+                    {% for amenity in amenities.values() | sort(attribute="name") %}
+                    <li>{{ amenity.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </section>
+    </div>
+
+    <h1 class="places_title">Places</h1>
+    <section class="places">
+        <article>
+            <h2>My home</h2>
+            <div class="price_by_night">
+                <p>$80</p>
+            </div>
+            <div class="information">
+                <div class="max_guest">
+                    <p>5 Guests</p>
+                </div>
+                <div class="number_rooms">
+                    <p>1 bedroom</p>
+                </div>
+                <div class="number_bathrooms">
+                    <p>1 bathroom</p>
+                </div>
+            </div>
+            <div class="user">
+                <p><b>Owner:</b> Khaled</p>
+            </div>
+            <div class="description">
+                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+            </div>
+            <div class="amenities_section">
+                <h3 class="title">Amenities</h3>
+                <div>
+                    <ul>
+                        <li>TV</li>
+                        <li>WI-FI</li>
+                        <li>pets friendly</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="reviews">
+                <h2 class="title">3 Reviews</h2>
+                <ul>
+                    <li>
+                        <h3>From Bob Dylan the 27th January 2017</h3>
+                    </li>
+                    <li>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        <article>
+            <h2>Tiny house</h2>
+            <div class="price_by_night">
+                <p>$65</p>
+            </div>
+            <div class="information">
+                <div class="max_guest">
+                    <p>5 Guests</p>
+                </div>
+                <div class="number_rooms">
+                    <p>1 bedroom</p>
+                </div>
+                <div class="number_bathrooms">
+                    <p>1 bathroom</p>
+                </div>
+            </div>
+            <div class="user">
+                <p><b>Owner:</b> Khaled</p>
+            </div>
+            <div class="description">
+                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias. Illum qui dolorem eum fugiat quo voluptas nulla pariatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur. Vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</span>
+            </div>
+            <div class="amenities_section">
+                <h3 class="title">Amenities</h3>
+                <div>
+                    <ul>
+                        <li>TV</li>
+                        <li>WI-FI</li>
+                        <li>pets friendly</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="reviews">
+                <h2 class="title">3 Reviews</h2>
+                <ul>
+                    <li>
+                        <h3>From Bob Dylan the 27th January 2017</h3>
+                    </li>
+                    <li>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        <article>
+            <h2>A suite</h2>
+            <div class="price_by_night">
+                <p>$190</p>
+            </div>
+            <div class="information">
+                <div class="max_guest">
+                    <p>5 Guests</p>
+                </div>
+                <div class="number_rooms">
+                    <p>1 bedroom</p>
+                </div>
+                <div class="number_bathrooms">
+                    <p>1 bathroom</p>
+                </div>
+            </div>
+            <div class="user">
+                <p><b>Owner:</b> Khaled</p>
+            </div>
+            <div class="description">
+                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+            </div>
+            <div class="amenities_section">
+                <h3 class="title">Amenities</h3>
+                <div>
+                    <ul>
+                        <li>TV</li>
+                        <li>WI-FI</li>
+                        <li>pets friendly</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="reviews">
+                <h2 class="title">3 Reviews</h2>
+                <ul>
+                    <li>
+                        <h3>From Bob Dylan the 27th January 2017</h3>
+                    </li>
+                    <li>
+                        <p>Lorem ipsum dolor sit amet</p>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </section>
+    <footer>Best School</footer>
+</body>
+</html>

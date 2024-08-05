@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: space-between;
 }
+
 button {
     font-size: 18px;
     background-color: #FF5A5F;
@@ -17,55 +18,45 @@ button {
     border-radius: 4px;
     margin-right: 30px;
     border: none;
-
-    overflow: hidden;        /* Hide overflow text */
-    white-space: nowrap;     /* Prevent text wrapping */
-    text-overflow: ellipsis; /* Add ellipsis to overflow text */
-    max-width: 100%;         /* Ensure width fits container */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
+
 button:hover {
     opacity: 90%;
 }
 
-.locations {
+.locations, .amenities {
     height: 100%;
     max-width: 25%;
     min-width: 25%;
     order: -2;
     border-right: #DDDDDD 1px solid;
+    position: relative;
 }
 
 .amenities {
-    height: 100%;
-    max-width: 25%;
-    min-width: 25%;
     order: -1;
     margin-right: calc(25% + 30px);
 }
 
-.locations h3,
-.amenities h3 {
+.locations h3, .amenities h3, .locations h4, .amenities h4 {
     font-weight: 600;
     margin-left: 25px;
-
-    overflow: hidden;        /* Hide overflow text */
-    white-space: nowrap;     /* Prevent text wrapping */
-    text-overflow: ellipsis; /* Add ellipsis to overflow text */
-    max-width: 100%;         /* Ensure width fits container */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
-.locations h4,
-.amenities h4 {
+.locations h4, .amenities h4 {
     font-weight: 400;
     font-size: 14px;
-    margin-left: 25px;
     margin-top: -15px;
-
-    overflow: hidden;        /* Hide overflow text */
-    white-space: nowrap;     /* Prevent text wrapping */
-    text-overflow: ellipsis; /* Add ellipsis to overflow text */
-    max-width: 100%;         /* Ensure width fits container */
 }
+
 .popover {
     display: none;
     background-color: #FAFAFA;
@@ -77,39 +68,46 @@ button:hover {
     list-style-type: none;
     margin-top: -1%;
     height: 190px;
+    position: absolute;
+    z-index: 10;
 }
 
 .locations h2 {
     font-size: 16px;
 }
 
-.amenities:hover .popover,
-.locations:hover .popover{
+.amenities:hover .popover, .locations:hover .popover {
     display: inline-block;
 }
-.cities {
+
+.cities, .amenities .popover, .locations .popover {
     list-style-type: none;
+    padding: 0;
+    padding-bottom: 20px;
 }
 
 .amenities .popover {
-    padding: 0%;
     padding-top: 20px;
-    padding-bottom: 20px;
     line-height: 20px;
-    width: 100%;
     height: 190px;
-    overflow-y: auto;
-    overflow-x: auto;
 }
+
 .locations .popover {
-    padding: 0%;
-    padding-bottom: 20px;
-    height: calc(190px + 20px);
+    height: 210px;
 }
 
 .locations .popover h2 {
     padding-left: 20px;
+    font-size: 22px;
 }
+
 .amenities .popover li {
-    padding-left: 20px;
+    padding-left: 25px;
 }
+
+.cities li {
+    padding-left: 30px;
+    line-height: 25px;
+    font-size: 15px;
+}
+

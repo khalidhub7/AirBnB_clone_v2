@@ -1,22 +1,15 @@
 .places {
     display: flex;
-    justify-content: center; /* Horizontally */
+    justify-content: center;
     flex-wrap: wrap;
-    padding-left: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
-    padding-right: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
-    /* Commented-out code for reference */
-    /* background-color: yellow; */
-    /* calc((100% - (780px + 160px + 4px)) / 2) */
-    /* 780px: article widths, 160px: margins & paddings, 4px: borders */
+    padding: 0 15%;
 }
 
 .places_title {
     font-size: 30px;
-    margin-left: 17%;
     width: fit-content;
-    margin-bottom: -2px;
-    margin-top: -8px;
-    /* background-color: #FF5A5F; */
+    margin: -8px 0 -2px;
+    margin-left: 17%;
 }
 
 .places article {
@@ -29,8 +22,16 @@
 .places article h2 {
     font-size: 30px;
     text-align: center;
-    margin-top: -5px;
-    margin-bottom: 55px;
+    margin: -5px 0 55px;
+}
+
+.place_name {
+    width: 320px;
+    height: 100px;
+    overflow: hidden;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .price_by_night {
@@ -46,8 +47,9 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    left: 82%;
-    top: -85px;
+    left: 320px;
+    top: -150px;
+    margin-bottom: -50px;
 }
 
 .information {
@@ -55,7 +57,7 @@
     border-top: 1px solid #DDDDDD;
     border-bottom: 1px solid #DDDDDD;
     position: relative;
-    top: calc(-60px - 8px); /* 60px: height of .price_by_night, 8px: borders */
+    top: -68px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -68,8 +70,6 @@
     background-position: center top;
     position: relative;
     margin-top: 5%;
-    /* Background images */
-    /* background-color: yellow; */
 }
 
 .max_guest {
@@ -114,22 +114,14 @@ body {
     padding-bottom: 10px;
 }
 
-.amenities_section div {
-    margin-top: -40px;
-}
-
-.amenities_section div ul {
+.amenities_section ul {
     list-style-type: none;
     line-height: 30px;
-    margin-bottom: 40px;
-    margin-left: -40px;
+    margin: -40px 0 40px -40px;
 }
 
 .amenities_section ul li {
     height: fit-content;
-}
-
-.amenities_section ul li {
     background-repeat: no-repeat;
     background-size: 30px;
     background-position: left center;
@@ -164,8 +156,7 @@ body {
 
 .reviews ul {
     list-style-type: none;
-    margin-left: -30px;
-    margin-top: -40px;
+    margin: -40px 0 0 -30px;
 }
 
 .reviews ul h3 {
@@ -176,3 +167,4 @@ body {
     font-size: 14px;
     margin-top: -10px;
 }
+
