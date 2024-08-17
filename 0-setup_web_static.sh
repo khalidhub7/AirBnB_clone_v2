@@ -2,14 +2,14 @@
 # setup servers to deploy files
 
 
-# Installs Nginx if it's not already installed
+# install Nginx if not installed
 dpkg -l | grep nginx > /dev/null 2>&1 || (sudo apt -y update && sudo apt -y upgrade && sudo apt -y install nginx)
 
 # Creates dir if doesn't exist
 ls /data/web_static/releases/test/ > /dev/null 2>&1 || sudo mkdir -p /data/web_static/releases/test/
 ls /data/web_static/shared/ > /dev/null 2>&1 || sudo mkdir -p /data/web_static/shared/
 
-# Use sudo with tee for redirect
+
 echo "<html>
   <head>
   </head>
