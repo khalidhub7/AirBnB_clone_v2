@@ -1,20 +1,22 @@
 .places {
     display: flex;
-    justify-content: center; /* horizontally */
+    justify-content: center; /* Horizontally centers content */
     flex-wrap: wrap;
-    /* background-color: yellow; */
     /* calc((100% - (780px + 160px + 4px)) / 2) */
-/* 780px: article widths, 160px: margins & paddings, 4px: borders */
+    /* 780px: article widths, 160px: margins & paddings, 4px: borders */
     padding-left: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
     padding-right: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
+    margin-top: 65px;
 }
+
 .places_title {
     font-size: 30px;
-    margin-left: 17%;
-    /* background-color: #FF5A5F; */
     width: fit-content;
-    margin-bottom: -2px;
-    margin-top: -8px;
+    height: fit-content;
+
+    position: absolute;
+    top: 22%;
+    right: 75%;
 }
 
 .places article {
@@ -34,21 +36,22 @@
 .price_by_night {
     color: #FF5A5F;
     border: #e04c51 4px solid;
-    width: fit-content;
-    height: 60px;
+    /* width: fit-content; */
+    /* height: 60px; */
     min-width: 60px;
     min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     font-size: 30px;
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     position: relative;
     left: 82%;
     top: -85px;
 }
+
 .information {
     height: 80px;
     border-top: #DDDDDD 1px solid;
@@ -122,9 +125,13 @@
 
 .user {
     margin-top: -14%;
-    width: fit-content;
+    /* width: fit-content; */
 }
 
 body {
     margin-bottom: 20%;
+}
+
+#need_hide {
+    display: none;
 }

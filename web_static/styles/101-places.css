@@ -176,3 +176,7 @@ body {
     font-size: 14px;
     margin-top: -10px;
 }
+
+#need_hide {
+    display: none;
+}

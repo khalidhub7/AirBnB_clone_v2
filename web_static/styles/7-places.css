@@ -24,7 +24,13 @@
     border: #FF5A5F 1px solid;
 }
 
-.places article h2 {
-    font-size: 30px;
+.places article h3 {
+    font-size: 25px;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#need_hide, #need_hide2 {
+    display: none;
 }

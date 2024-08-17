@@ -1,22 +1,22 @@
 .places {
     display: flex;
-    justify-content: center; /* Horizontally */
+    justify-content: center; /* Horizontally centers content */
     flex-wrap: wrap;
-    padding-left: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
-    padding-right: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
-    /* Commented-out code for reference */
-    /* background-color: yellow; */
     /* calc((100% - (780px + 160px + 4px)) / 2) */
     /* 780px: article widths, 160px: margins & paddings, 4px: borders */
+    padding-left: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
+    padding-right: calc((100% - (390px + 390px + 80px + 80px + 4px)) / 2);
+    margin-top: 65px;
 }
 
 .places_title {
     font-size: 30px;
-    margin-left: 17%;
     width: fit-content;
-    margin-bottom: -2px;
-    margin-top: -8px;
-    /* background-color: #FF5A5F; */
+    height: fit-content;
+
+    position: absolute;
+    top: 22%;
+    right: 75%;
 }
 
 .places article {
@@ -175,4 +175,8 @@ body {
 .reviews ul p {
     font-size: 14px;
     margin-top: -10px;
+}
+
+#need_hide {
+    display: none;
 }
