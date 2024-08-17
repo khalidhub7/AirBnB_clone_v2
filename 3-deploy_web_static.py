@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 # Update with your actual server IPs
-env.hosts = ['52.55.249.213', '54.157.32.137']
+env.hosts = ['34.203.38.10', '54.175.223.87']
 
 
 def do_pack():
