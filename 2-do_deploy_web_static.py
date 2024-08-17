@@ -1,27 +1,50 @@
 #!/usr/bin/python3
-""" fabric that distributes an archive to the web servers """
-from fabric.api import put, run, env
-from os.path import exists
+"""Distributes an archive to web servers using fabric"""
 
-env.hosts = ["34.203.38.10", "54.175.223.87"]
+from fabric.api import *
+from os.path import exists
+from os import path, makedirs
+from datetime import datetime
+
+
+env.user = 'ubuntu'
+env.hosts = ['18.206.198.128', '107.23.109.180']
+
+
+def do_pack():
+    """generate a .tgz archive from the contents of the web_static folder"""
+    if not path.exists("versions"):
+        makedirs("versions")
+
+    creation_time = datetime.now().strftime("%Y%m%d%H%M%S")
+    tgz_archive_name = "web_static_{}.tgz".format(creation_time)
+    tgz_archive_path = path.join("versions", tgz_archive_name)
+    make_tgz = local("tar -cvzf {} web_static".format(tgz_archive_path))
+
+    if make_tgz.succeeded:
+        return (tgz_archive_path)
+    else:
+        return (None)
 
 
 def do_deploy(archive_path):
-    """ deploying an archive """
-    if exists(archive_path) == False:
+    """distributes an archive to my web servers"""
+    if exists(archive_path) is False:
         return False
-    file_name = archive_path.split('/')[-1]
-    remove_extention = file_name.split('.')[0]
-    remote_path = "/data/web_static/releases/"
 
-    put(archive_path, "/tmp")
-    run('mkdir -p {}{}/'.format(remote_path, remove_extention))
-    run('tar -xzf /tmp/{} -C {}{}/'.format(file_name, remote_path, remove_extention))
+    filename = archive_path.split('/')[-1]
+    no_tgz = '/data/web_static/releases/' + "{}".format(filename.split('.')[0])
+    tmp = "/tmp/" + filename
 
-    # Clean Up
-    run('rm /tmp/{}'.format(file_name))
-    run('mv {0}{1}/web_static/* {0}{1}/'.format(remote_path, remove_extention))
-    run('rm -rf {}{}/web_static'.format(remote_path, remove_extention))
-    run('rm -rf /data/web_static/current')
-    run('ln -s {}{}/ /data/web_static/current'.format(remote_path, remove_extention))
-    return True
+    try:
+        put(archive_path, "/tmp/")
+        run("mkdir -p {}/".format(no_tgz))
+        run("tar -xzf {} -C {}/".format(tmp, no_tgz))
+        run("rm {}".format(tmp))
+        run("mv {}/web_static/* {}/".format(no_tgz, no_tgz))
+        run("rm -rf {}/web_static".format(no_tgz))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {}/ /data/web_static/current".format(no_tgz))
+        return True
+    except Exception:
+        return False
