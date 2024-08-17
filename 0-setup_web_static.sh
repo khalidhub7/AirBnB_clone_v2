@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set up servers to deploy files
+# setup servers to deploy files
 
 
 # Installs Nginx if it's not already installed
@@ -23,10 +23,10 @@ EOF
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
-sudo sed -i '26i \
-    location /hbnb_static {\n\
-        alias /data/web_static/current/;\n\
-    }' /etc/nginx/sites-available/default
+sudo sed -i '23i \
+\tlocation /hbnb_static {\n\
+\t\talias /data/web_static/current/;\n\
+\t}' /etc/nginx/sites-available/default
 
 
 sudo service nginx restart
